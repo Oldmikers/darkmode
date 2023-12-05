@@ -74,15 +74,13 @@
         function redirect() {
             var url = document.getElementById("urlInput").value;
             if (url) {
-                window.open(url, "_blank");
-                alert("Redirected to: " + url);
+                window.location.href = url;
                 updateHistory(url);
             }
         }
 
         function redirectTo(url) {
-            window.open(url, "_blank");
-            alert("Redirected to: " + url);
+            window.location.href = url;
             updateHistory(url);
         }
 
