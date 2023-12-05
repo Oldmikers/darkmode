@@ -7,6 +7,7 @@
         body {
             background-color: black;
             margin: 0; /* Remove default margin */
+            font-family: Arial, sans-serif;
         }
 
         h1 {
@@ -16,6 +17,7 @@
         .red-button {
             background-color: red;
             color: black;
+            margin-right: 10px;
         }
 
         .img-responsive {
@@ -35,41 +37,72 @@
             border: none;
             cursor: pointer;
         }
+
+        #history {
+            margin-top: 20px;
+            color: white;
+        }
     </style>
 </head>
 
 <body>
     <h1>Beta Redirect Tool</h1>
 
-    <input type="text" id="urlInput" placeholder="Enter URL">
+    <input type="text" id="urlInput" placeholder="Enter URL" onkeydown="if (event.key === 'Enter') redirect()">
     <button onclick="redirect()">Go</button>
 
     <br><br>
 
-    <button class="red-button" onclick="redirectTo('https://oldmikers.github.io/proxys.github.io/')">Proxys</button>
-    <button class="red-button" onclick="redirectTo('https://www.google.com/')">Google</button>
-    <button class="red-button" onclick="redirectTo('https://oldmikers.github.io/mikergames.github.io/')">Games</button>
-    <button class="red-button" onclick="redirectTo('')">Misc</button>
+    <button class="red-button" onclick="redirectTo('https://oldmikers.github.io/proxys.github.io/')">
+        <img src="https://www.google.com/favicon.ico" alt="Proxys"> Proxys
+    </button>
+    <button class="red-button" onclick="redirectTo('https://www.google.com/')">
+        <img src="https://www.google.com/favicon.ico" alt="Google"> Google
+    </button>
+    <button class="red-button" onclick="redirectTo('https://oldmikers.github.io/mikergames.github.io/')">
+        <img src="https://www.google.com/favicon.ico" alt="Games"> Games
+    </button>
+    <button class="red-button" onclick="confirmRedirect()">Misc</button>
 
     <!-- Settings button -->
     <button id="settings-button" onclick="openSettings()">Settings</button>
+
+    <!-- History -->
+    <div id="history"></div>
 
     <script>
         function redirect() {
             var url = document.getElementById("urlInput").value;
             if (url) {
                 window.open(url, "_blank");
+                alert("Redirected to: " + url);
+                updateHistory(url);
             }
         }
 
         function redirectTo(url) {
             window.open(url, "_blank");
+            alert("Redirected to: " + url);
+            updateHistory(url);
         }
 
-        // Placeholder function for opening settings (customize this according to your needs)
         function openSettings() {
             alert("Settings clicked!");
             // Add your settings logic here
+        }
+
+        function confirmRedirect() {
+            var confirmed = confirm("Are you sure you want to redirect to an empty URL?");
+            if (confirmed) {
+                redirectTo('');
+            }
+        }
+
+        function updateHistory(url) {
+            var historyElement = document.getElementById('history');
+            var historyItem = document.createElement('div');
+            historyItem.textContent = url;
+            historyElement.prepend(historyItem);
         }
     </script>
 </body>
