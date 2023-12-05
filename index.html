@@ -1,33 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Calendar</title>
     <style>
         body {
-            background-color: black;
-            margin: 0; /* Remove default margin */
-            font-family: Arial, sans-serif;
+            background-image: url("https://media.istockphoto.com/id/1359090444/photo/milky-way-galaxy-with-stars-and-space-background-universe.webp?b=1&s=170667a&w=0&k=20&c=NalYcXfOAYHcUIxGN9RaGpwad6GD92T9QSnJZKo0ycI=");
+            background-size: cover;
+            background-position: center;
+            color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            font-family: 'Arial', sans-serif;
         }
 
         h1 {
-            color: red;
+            color: #ff0000;
+        }
+
+        .settings-button {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background-color: #000000; /* Black background */
+            color: #ffffff; /* White text */
+            border: 2px solid #ffffff; /* White border */
+        }
+
+        .settings-button:hover {
+            background-color: #333333; /* Darker black on hover */
         }
 
         .red-button {
-            background-color: red;
-            color: black;
-            margin-right: 10px;
-            padding: 8px 16px;
-            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-            border: none;
+            background-color: rgba(255, 0, 0, 0.5);
+            border: 2px solid #d00000;
+            color: white;
+            padding: 4px 8px;
+            font-size: 10px;
             cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         .red-button:hover {
-            background-color: #ff3333;
-            transform: scale(1.05);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            background-color: rgba(208, 0, 0, 0.7);
+            border-color: #a00000;
+            color: #ffffff;
         }
 
         .img-responsive {
@@ -36,85 +54,77 @@
             height: auto;
         }
 
-        /* Style for settings button */
-        #settings-button {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
+        .input-container {
+            margin-bottom: 20px;
         }
 
-        #history {
-            margin-top: 20px;
-            color: white;
+        script {
+            background-color: black; /* Set black background for script block */
+            color: white; /* Set white text color for script */
+            padding: 10px; /* Add padding to the script block */
+            display: block;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .red-button {
+                padding: 3px 6px;
+                font-size: 9px;
+            }
         }
     </style>
-</head>
 
-<body>
-    <h1>Beta Redirect Tool</h1>
-
-    <input type="text" id="urlInput" placeholder="Enter URL" onkeydown="if (event.key === 'Enter') redirect()">
-    <button class="red-button" onclick="redirect()">Go</button>
-
-    <br><br>
-
-    <button class="red-button" onclick="redirectTo('https://oldmikers.github.io/proxys.github.io/')">
-        Proxys
-    </button>
-    <button class="red-button" onclick="redirectTo('https://www.google.com/')">
-        Google
-    </button>
-    <button class="red-button" onclick="redirectTo('https://oldmikers.github.io/mikergames.github.io/')">
-        Games
-    </button>
-    <button class="red-button" onclick="confirmRedirect()">
-        Misc
-    </button>
-
-    <!-- Settings button -->
-    <button id="settings-button" onclick="openSettings()">Settings</button>
-
-    <!-- History -->
-    <div id="history"></div>
-
+    <script src="https://cdn.animejs.com/lib/anime.min.js"></script>
     <script>
+        anime.timeline({
+            duration: 0.3
+        }).add({
+            targets: '.red-button',
+            opacity: [0.7, 1],
+            scale: [1.05, 1]
+        }).play();
+
         function redirect() {
-            var url = document.getElementById("urlInput").value;
-            if (url) {
-                window.location.href = url;
-                updateHistory(url);
+            var urlInputValue = document.getElementById('urlInput').value;
+            if (urlInputValue.trim() === '') {
+                alert('Please enter a valid URL.');
+            } else {
+                window.location.href = urlInputValue;
             }
         }
 
         function redirectTo(url) {
             window.location.href = url;
-            updateHistory(url);
         }
 
-        function openSettings() {
-            alert("Settings clicked!");
-            // Add your settings logic here
-        }
-
-        function confirmRedirect() {
-            var confirmed = confirm("Are you sure you want to redirect to an empty URL?");
-            if (confirmed) {
-                redirectTo('');
+        // Add event listener for 'Enter' key press
+        document.getElementById('urlInput').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                redirect();
             }
-        }
-
-        function updateHistory(url) {
-            var historyElement = document.getElementById('history');
-            var historyItem = document.createElement('div');
-            historyItem.textContent = url;
-            historyElement.prepend(historyItem);
-        }
+        });
     </script>
+</head>
+
+<body>
+    <h1>Beta Redirect Tool</h1>
+
+    <div class="input-container">
+        <input type="text" id="urlInput" placeholder="Enter URL">
+        <button class="red-button" onclick="redirect()">Go</button>
+    </div>
+
+    <br><br>
+    <div class="button-container">
+        <button class="red-button" onclick="redirectTo('https://oldmikers.github.io/proxys.github.io/')">Proxys</button>
+        <button class="red-button" onclick="redirectTo('https://www.google.com/')">Google</button>
+        <button class="red-button" onclick="redirectTo('https://oldmikers.github.io/mikergames.github.io/')">Games</button>
+        <button class="red-button" onclick="redirectTo('https://oldmikers.github.io/misc.github.io/')">Misc</button>
+    </div>
+
+    <button class="settings-button" onclick="redirectTo('https://oldmikers.github.io/setting.github.io/')">
+        <img src="settings-icon.png" alt="Settings Icon">
+    </button>
 </body>
 
 </html>
