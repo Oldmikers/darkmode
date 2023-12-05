@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Google Calendar</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0; /* Remove default margin */
+        }
+
+        h1 {
+            color: red;
+        }
+
+        .red-button {
+            background-color: red;
+            color: black;
+        }
+
+        .img-responsive {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Style for settings button */
+        #settings-button {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>My Redirect Tool</h1>
+
+    <input type="text" id="urlInput" placeholder="Enter URL">
+    <button onclick="redirect()">Go</button>
+
+    <br><br>
+
+    <button class="red-button" onclick="redirectTo('https://oldmikers.github.io/proxys.github.io/')">Proxys</button>
+    <button class="red-button" onclick="redirectTo('https://www.google.com/')">Google</button>
+    <button class="red-button" onclick="redirectTo('https://oldmikers.github.io/mikergames.github.io/')">Games</button>
+    <button class="red-button" onclick="redirectTo('')">Misc</button>
+
+    <!-- Settings button -->
+    <button id="settings-button" onclick="openSettings()">Settings</button>
+
+    <script>
+        function redirect() {
+            var url = document.getElementById("urlInput").value;
+            if (url) {
+                window.open(url, "_blank");
+            }
+        }
+
+        function redirectTo(url) {
+            window.open(url, "_blank");
+        }
+
+        // Placeholder function for opening settings (customize this according to your needs)
+        function openSettings() {
+            alert("Settings clicked!");
+            // Add your settings logic here
+        }
+    </script>
+</body>
+
+</html>
